@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="FutebolHub — plataforma para consultar, favoritar e avaliar times de futebol."
+    >
+
+    <title>FutebolHub | Futebol em um só lugar</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <header class="header">
+
+        <div class="container header-content">
+
+            <a
+                href="#inicio"
+                class="logo"
+            >
+
+                <span class="logo-mark">F</span>
+
+                <span>
+                    Futebol<span>Hub</span>
+                </span>
+
+            </a>
+
+            <nav class="nav">
+
+                <a href="#inicio">
+                    Início
+                </a>
+
+                <a href="#dashboard">
+                    Dashboard
+                </a>
+
+                <a href="#times">
+                    Times
+                </a>
+
+                <a href="#favoritos">
+                    Favoritos
+                </a>
+
+                <a href="#avaliacoes">
+                    Avaliações
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- =====================================
+             HERO
+        ====================================== -->
+
+        <section
+            id="inicio"
+            class="hero"
+        >
+
+            <div class="hero-background"></div>
+
+            <div class="container hero-content">
+
+                <div class="hero-badge">
+
+                    <span class="status-dot"></span>
+
+                    PLATAFORMA DE FUTEBOL
+
+                </div>
+
+                <h1>
+
+                    O futebol que você
+                    <span>acompanha.</span>
+
+                </h1>
+
+                <p class="hero-description">
+
+                    Pesquise clubes, descubra informações,
+                    salve seus favoritos e registre suas
+                    avaliações em um único lugar.
+
+                </p>
+
+
+                <!-- BUSCA -->
+
+                <div class="search-container">
+
+                    <div class="search-box">
+
+                        <span class="search-icon">
+                            ⌕
+                        </span>
+
+                        <input
+                            type="text"
+                            id="campoBusca"
+                            placeholder="Pesquise por um time..."
+                            autocomplete="off"
+                        >
+
+                        <button
+                            id="btnPesquisar"
+                            type="button"
+                        >
+                            Pesquisar
+                        </button>
+
+                    </div>
+
+
+                    <!-- SUGESTÕES -->
+
+                    <div
+                        id="sugestoesTimes"
+                        class="sugestoes-times"
+                    ></div>
+
+                </div>
+
+
+                <div
+                    id="mensagem"
+                    class="mensagem"
+                ></div>
+
+
+                <div class="hero-features">
+
+                    <div>
+                        <strong>API</strong>
+                        <span>Dados esportivos</span>
+                    </div>
+
+                    <div>
+                        <strong>FIREBASE</strong>
+                        <span>Dados persistentes</span>
+                    </div>
+
+                    <div>
+                        <strong>CRUD</strong>
+                        <span>Gerenciamento completo</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             DASHBOARD
+        ====================================== -->
+
+        <section
+            id="dashboard"
+            class="dashboard-section"
+        >
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            VISÃO GERAL
+                        </span>
+
+                        <h2>
+                            Dashboard
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        Dados atualizados a partir das
+                        informações armazenadas no sistema.
+                    </p>
+
+                </div>
+
+
+                <!-- ESTATÍSTICAS -->
+
+                <div class="stats-grid">
+
+                    <article class="stat-card">
+
+                        <div class="stat-icon">
+                            A
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Avaliações
+                            </span>
+
+                            <strong id="totalAvaliacoes">
+                                0
+                            </strong>
+
+                            <small>
+                                registros no sistema
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <div class="stat-icon">
+                            F
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Favoritos
+                            </span>
+
+                            <strong id="totalFavoritos">
+                                0
+                            </strong>
+
+                            <small>
+                                clubes salvos
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <div class="stat-icon">
+                            ★
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Média geral
+                            </span>
+
+                            <strong id="mediaAvaliacoes">
+                                0.0
+                            </strong>
+
+                            <small>
+                                de 5 pontos
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="stat-card">
+
+                        <div class="stat-icon">
+                            ↑
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Melhor nota
+                            </span>
+
+                            <strong id="melhorNota">
+                                0
+                            </strong>
+
+                            <small>
+                                maior avaliação
+                            </small>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- GRÁFICOS -->
+
+                <div class="charts-grid">
+
+                    <article class="chart-card">
+
+                        <div class="chart-header">
+
+                            <div>
+
+                                <span>
+                                    AVALIAÇÕES
+                                </span>
+
+                                <h3>
+                                    Distribuição das notas
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div class="chart-container">
+
+                            <canvas
+                                id="graficoNotas"
+                            ></canvas>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="chart-card">
+
+                        <div class="chart-header">
+
+                            <div>
+
+                                <span>
+                                    RANKING
+                                </span>
+
+                                <h3>
+                                    Times mais avaliados
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div class="chart-container">
+
+                            <canvas
+                                id="graficoTimes"
+                            ></canvas>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             TIMES
+        ====================================== -->
+
+        <section
+            id="times"
+            class="section"
+        >
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            EXPLORAR
+                        </span>
+
+                        <h2>
+                            Times encontrados
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        Resultados obtidos através da
+                        API externa de futebol.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="loadingTimes"
+                    class="loading hidden"
+                >
+
+                    <div class="spinner"></div>
+
+                    <p>
+                        Consultando informações...
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="resultadoTimes"
+                    class="grid-times"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             FAVORITOS
+        ====================================== -->
+
+        <section
+            id="favoritos"
+            class="section favorites-section"
+        >
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            SUA LISTA
+                        </span>
+
+                        <h2>
+                            Meus favoritos
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        Seus clubes favoritos armazenados
+                        no Firebase Firestore.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="listaFavoritos"
+                    class="grid-favoritos"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             AVALIAÇÕES
+        ====================================== -->
+
+        <section
+            id="avaliacoes"
+            class="section"
+        >
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            COMUNIDADE
+                        </span>
+
+                        <h2>
+                            Avaliações
+                        </h2>
+
+                    </div>
+
+                    <p>
+                        Registre sua opinião sobre os clubes.
+                    </p>
+
+                </div>
+
+
+                <!-- FORMULÁRIO -->
+
+                <div class="evaluation-layout">
+
+                    <form
+                        id="formAvaliacao"
+                        class="form-avaliacao"
+                    >
+
+                        <div class="form-header">
+
+                            <span class="form-number">
+                                01
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Nova avaliação
+                                </h3>
+
+                                <p>
+                                    Compartilhe sua opinião.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="nomeUsuario">
+                                Seu nome
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nomeUsuario"
+                                placeholder="Como podemos chamar você?"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="nomeTime">
+                                Time
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nomeTime"
+                                placeholder="Ex.: Flamengo"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="nota">
+                                Nota
+                            </label>
+
+                            <select id="nota">
+
+                                <option value="5">
+                                    5 — Excelente
+                                </option>
+
+                                <option value="4">
+                                    4 — Muito bom
+                                </option>
+
+                                <option value="3">
+                                    3 — Bom
+                                </option>
+
+                                <option value="2">
+                                    2 — Regular
+                                </option>
+
+                                <option value="1">
+                                    1 — Fraco
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="comentario">
+                                Comentário
+                            </label>
+
+                            <textarea
+                                id="comentario"
+                                placeholder="Escreva sua avaliação..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="btn-primary"
+                            id="btnSalvarAvaliacao"
+                        >
+                            Publicar avaliação
+                        </button>
+
+
+                        <div
+                            id="mensagemAvaliacao"
+                            class="mensagem"
+                        ></div>
+
+                    </form>
+
+
+                    <div class="evaluation-info">
+
+                        <span class="eyebrow">
+                            CRUD
+                        </span>
+
+                        <h3>
+                            Sua opinião faz parte
+                            do FutebolHub.
+                        </h3>
+
+                        <p>
+                            As avaliações cadastradas ficam
+                            armazenadas no Firebase e podem
+                            ser consultadas, editadas e
+                            excluídas.
+                        </p>
+
+
+                        <div class="crud-list">
+
+                            <div>
+                                <strong>C</strong>
+                                <span>
+                                    Criar avaliação
+                                </span>
+                            </div>
+
+                            <div>
+                                <strong>R</strong>
+                                <span>
+                                    Consultar avaliações
+                                </span>
+                            </div>
+
+                            <div>
+                                <strong>U</strong>
+                                <span>
+                                    Atualizar comentário
+                                </span>
+                            </div>
+
+                            <div>
+                                <strong>D</strong>
+                                <span>
+                                    Excluir avaliação
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LISTA DE AVALIAÇÕES -->
+
+                <div
+                    id="listaAvaliacoes"
+                    class="lista-avaliacoes"
+                ></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div>
+
+                <a
+                    href="#inicio"
+                    class="footer-logo"
+                >
+                    FutebolHub
+                </a>
+
+                <p>
+                    Futebol, dados e opinião
+                    em um só lugar.
+                </p>
+
+            </div>
+
+            <div class="footer-tech">
+
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+                <span>Firebase</span>
+                <span>API</span>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <div class="container">
+
+                <p>
+                    Projeto acadêmico — FutebolHub
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script
+        type="module"
+        src="script.js"
+    ></script>
+
+</body>
+
+</html>
